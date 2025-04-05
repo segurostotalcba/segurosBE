@@ -40,7 +40,11 @@ router.get('/clientes', async (req, res) => {
         const clientes = await Cliente.find();
         res.json(clientes);
     } catch (error) {
-        res.status(500).json({ message: "Error al obtener clientes", error });
+        console.error('Error al obtener clientes:', error);
+        res.status(500).json({
+          message: 'Error al obtener clientes',
+          error: error.message || 'Error desconocido',
+        });
     }
 });
 
