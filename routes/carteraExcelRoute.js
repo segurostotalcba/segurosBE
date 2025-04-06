@@ -4,6 +4,7 @@ const carteraMafre = require("../controllers/carteras/mafreCartera");
 const carteraSancor = require("../controllers/carteras/sancorCartera");
 const carteraRivadavia = require("../controllers/carteras/rivadaviaCartera");
 const carteraTriunfo = require("../controllers/carteras/triunfoCartera");
+const carteraRUS = require("../controllers/carteras/RUSCartera");
 const cartera = require("../controllers/carteras/baseCartera");
 
 const router = express.Router();
@@ -28,5 +29,5 @@ router.get("/mafre", (req, res) => fetchData(req, res, carteraMafre.fetchDataMaf
 router.get("/sancor", (req, res) => fetchData(req, res, carteraSancor.fetchDataSancor));
 router.get("/rivadavia", (req, res) => fetchData(req, res, carteraRivadavia.fetchDataRivadavia));
 router.get("/triunfo", (req, res) => fetchData(req, res, carteraTriunfo.fetchDataTriunfo));
-
+router.get("/RUS", (req, res) => fetchData(req, res, carteraRUS.fetchDataRUS));
 module.exports = router;
