@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get("/buscar", async (req, res) => {
     try {
-        const { nombre, dni, poliza, patente } = req.query;
+        const { nombre, dni, poliza, patente, telefonoMovil } = req.query;
         let clientes = null;
 
         // Buscar por nombre o DNI con mejor manejo de espacios y mayúsculas
@@ -26,6 +26,16 @@ router.get("/buscar", async (req, res) => {
             const polizaEncontrada = await Poliza.findOne({ poliza });
             if (polizaEncontrada) {
                 clientes = await Cliente.find({ _id: polizaEncontrada.idCliente });
+            }
+        }
+
+          // Buscar por telefono movil
+          if (!clientes && telefonoMovil) {
+            const datosContacto = await DatosContacto.findOne({
+                telefonoMovil: new RegExp(telefonoMovil.trim(), "i")
+            });
+            if (datosContacto) {
+                clientes = await Cliente.find({ _id: datosContacto.idCliente });
             }
         }
 
